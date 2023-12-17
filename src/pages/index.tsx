@@ -7,15 +7,20 @@ export default function Home() {
   const hello = api.post.hello.useQuery({ text: "from tRPC" });
   const entityCreateMutation = api.entity.create.useMutation();
   const entityListQuery = api.entity.list.useQuery({});
-  const [entityName, setEntityName] = useState("");
+  const [form, setForm] = useState({
+    entityName: "",
+    relationshipTypeName: "",
+  });
 
   const handleAddButtonClick = () => {
-    entityCreateMutation.mutate({ name: entityName });
+    entityCreateMutation.mutate({ name: form.entityName });
   };
 
-  const handleEntityNameChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const newEntityName = event.target.value;
-    setEntityName(newEntityName);
+  const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const newFormKey = event.target.name;
+    const newformValue = event.target.value;
+    const newForm = { ...form, [newFormKey]: newformValue };
+    setForm(newForm);
   };
 
   console.log(hello.data?.greeting);
@@ -26,8 +31,9 @@ export default function Home() {
       <label>Name</label>
       <input
         className="block border p-1 hover:opacity-50"
-        value={entityName}
-        onChange={handleEntityNameChange}
+        name="entityName"
+        value={form.entityName}
+        onChange={handleInputChange}
       ></input>
       <button
         className="block border p-1 hover:opacity-50"
@@ -38,7 +44,12 @@ export default function Home() {
 
       <h1 className="text-lg font-bold">Create an Relationship Type</h1>
       <label>Name</label>
-      <input className="block border p-1 hover:opacity-50"></input>
+      <input
+        name={"relationshipTypeName"}
+        value={form.relationshipTypeName}
+        onChange={handleInputChange}
+        className="block border p-1 hover:opacity-50"
+      ></input>
       <button
         className="block border p-1 hover:opacity-50"
         onClick={handleAddButtonClick}
