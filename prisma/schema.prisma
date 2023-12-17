@@ -18,3 +18,10 @@ model Post {
 
     @@index([name])
 }
+
+model Entity {
+    id   Int    @id @default(autoincrement())
+    name String
+
+    @@index([name])
+}
