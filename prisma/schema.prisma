@@ -25,3 +25,10 @@ model Entity {
 
     @@index([name])
 }
+
+model RelationshipType {
+    id   Int    @id @default(autoincrement())
+    name String
+
+    @@index([name])
+}

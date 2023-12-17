@@ -6,6 +6,7 @@ import { api } from "~/utils/api";
 export default function Home() {
   const hello = api.post.hello.useQuery({ text: "from tRPC" });
   const entityCreateMutation = api.entity.create.useMutation();
+  const relationTypeCreateMutation = api.relationshipType.create.useMutation();
   const entityListQuery = api.entity.list.useQuery({});
   const [form, setForm] = useState({
     entityName: "",
@@ -14,6 +15,10 @@ export default function Home() {
 
   const handleAddButtonClick = () => {
     entityCreateMutation.mutate({ name: form.entityName });
+  };
+
+  const handleCreateRelationshipTypeClick = () => {
+    relationTypeCreateMutation.mutate({ name: form.relationshipTypeName });
   };
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -52,7 +57,7 @@ export default function Home() {
       ></input>
       <button
         className="block border p-1 hover:opacity-50"
-        onClick={handleAddButtonClick}
+        onClick={handleCreateRelationshipTypeClick}
       >
         Create Relationship Type
       </button>

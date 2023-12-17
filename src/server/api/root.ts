@@ -1,6 +1,7 @@
-import { postRouter } from "~/server/api/routers/post";
-import { entityRouter } from "./routers/entity";
 import { createTRPCRouter } from "~/server/api/trpc";
+import { entityRouter } from "./routers/entity";
+import { postRouter } from "~/server/api/routers/post";
+import { relationshipTypeRouter } from "./routers/relationship-type";
 
 /**
  * This is the primary router for your server.
@@ -10,6 +11,7 @@ import { createTRPCRouter } from "~/server/api/trpc";
 export const appRouter = createTRPCRouter({
   post: postRouter,
   entity: entityRouter,
+  relationshipType: relationshipTypeRouter,
 });
 
 // export type definition of API
