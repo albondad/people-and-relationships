@@ -6,6 +6,7 @@ import { api } from "~/utils/api";
 export default function Home() {
   const hello = api.post.hello.useQuery({ text: "from tRPC" });
   const entityCreateMutation = api.entity.create.useMutation();
+  const entityListQuery = api.entity.list.useQuery({});
   const [entityName, setEntityName] = useState("");
 
   const handleAddButtonClick = () => {
@@ -46,11 +47,19 @@ export default function Home() {
       <h1 className="text-lg font-bold">Entities</h1>
       <table>
         <thead>
-          <tr>
+          <tr className="text-left">
             <th>ID</th>
             <th>Name</th>
           </tr>
         </thead>
+        <tbody>
+          {entityListQuery.data?.map((element) => (
+            <tr key={element.id}>
+              <td>{element.id}</td>
+              <td>{element.name}</td>
+            </tr>
+          ))}
+        </tbody>
       </table>
     </div>
   );

@@ -24,5 +24,7 @@ export const entityRouter = createTRPCRouter({
       });
     }),
 
-  // readMany: publicProcedure.input(z.object({})).query(({ input }) => {}),
+  list: publicProcedure.input(z.object({})).query(({ ctx }) => {
+    return ctx.db.entity.findMany();
+  }),
 });
