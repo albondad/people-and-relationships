@@ -36,6 +36,16 @@ export default function Home() {
         Create Entity
       </button>
 
+      <h1 className="text-lg font-bold">Create an Relationship Type</h1>
+      <label>Name</label>
+      <input className="block border p-1 hover:opacity-50"></input>
+      <button
+        className="block border p-1 hover:opacity-50"
+        onClick={handleAddButtonClick}
+      >
+        Create Relationship Type
+      </button>
+
       <h1 className="text-lg font-bold">Add a Relationship</h1>
       <label>Entity 1</label>
       <input className="block border p-1 hover:opacity-50"></input>
